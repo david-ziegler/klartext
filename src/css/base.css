@@ -1,0 +1,62 @@
+html, body, #app, #klartextGroup {
+  height: 100%;
+}
+
+
+.flex-parent{
+  display: flex;
+}
+
+.dir-row{
+  flex-direction: row;
+}
+
+.dir-col{
+  flex-direction: column;
+}
+
+  #header{
+    justify-content: space-between;
+    padding: 4px 4px 4px 4px;
+  }
+
+    h1#groupname{
+      font: 40px Helvetica;
+      font-style: italic;
+      margin: 10px 0 15px 120px;
+    }
+
+    .specifyUsername{
+      padding: 4px 4px 0px 0px;
+    }
+
+  div#body{
+    height: 100%;
+  }
+
+    .categoryMenu {
+      padding: 0px 0px 0px 0px;
+    }
+
+    .categoryLink {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 3px 15px 3px 15px;
+    }
+
+    .selected{
+      background-color: #d0cbc5;
+    }
+
+
+
+    div.posts{
+      width: 100%;
+      height: 100%;
+      background-color: #d0cbc5;
+      padding: 10px 10px 10px 30px;
+    }
+
+
+
