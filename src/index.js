@@ -51,7 +51,7 @@ var Group = React.createClass({
 
   render: function () { 
     return (
-      <div id="klartextGroup" className="flex-parent dir-col">
+      <div id="klartextGroup" className="flex-parent dir-col center">
 
         <div id="header" className="flex-parent dir-row flex-child">
             <h1 id="groupname" className="flex-child">{groupData.groupName}</h1>
@@ -63,7 +63,9 @@ var Group = React.createClass({
             categories={groupData.categories} 
             selectedCat={this.state.selectedCategory}
             onCategorySelection={this.handleCategorySelection}/>
-          <Posts getUsername={this.getUsername}/>
+          <div id="postsEtc">
+            <Posts getUsername={this.getUsername}/>
+          </div>
         </div>
       </div>
     );

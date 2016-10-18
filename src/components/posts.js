@@ -1,13 +1,6 @@
 var React = require('react');
 
-// STYLE
-var postStyle = {
-  border: '1px',
-  borderColor: '#000000'
-};
 
-
-// CODE
 var Post = React.createClass({
   rawMarkup: function() {
     var md = new Remarkable();
@@ -17,7 +10,7 @@ var Post = React.createClass({
 
   render: function () {
     return (
-      <div className="post" style={postStyle}>
+      <div className="post">
         <span className="postAuthor">
           {this.props.author}:
         </span>
@@ -33,20 +26,17 @@ var Post = React.createClass({
 //<span dangerouslySetInnerHTML={this.rawMarkup()} />
 
 
-var PostList = React.createClass({
-  render: function () {
-    var allPosts = this.props.data.reverse();
-    var postNodes = allPosts.map(function(post){
-      return (
-        <Post author={post.author} key={post.id}>
-        {post.text}
-        </Post>
-      );
-    });
 
+var Thread = React.createClass({
+  render: function () {
     return (
-      <div className="PostList">
-        {postNodes}
+      <div className="thread">
+        <Post 
+          author={this.props.author} 
+          key={this.props.key}>
+            {this.props.children}
+        </ Post>
+        <AddComment />
       </div>
     );
   }
@@ -54,6 +44,25 @@ var PostList = React.createClass({
 
 
 
+
+var ThreadList = React.createClass({
+  render: function () {
+    var allPosts = this.props.data.reverse();
+    var threadNodes = allPosts.map(function(thread){
+      return (
+        <Thread author={thread.author} key={thread.id}>
+        {thread.text}
+        </Thread>
+      );
+    });
+
+    return (
+      <div className="PostList">
+        {threadNodes}
+      </div>
+    );
+  }
+});
 
 
 var AddPost = React.createClass({
@@ -85,11 +94,14 @@ var AddPost = React.createClass({
   },
 
   render: function() {
+    var placeholder = (this.props.postType == "newThread") ? "new post" : "comment";
+
     return (
-      <div style={postStyle}>
-        <form className="AddPost" onSubmit={this.handleSubmit}>
+      <div className={this.props.postType}>
+        <form className={this.props.postType} onSubmit={this.handleSubmit}>
           <textarea
-            placeholder="post"
+            className={this.props.postType}
+            placeholder={placeholder}
             onChange={this.handleTextChange}></textarea>
           <input type="submit" value="post" />
         </form>
@@ -99,7 +111,25 @@ var AddPost = React.createClass({
 });
 
 
-var PostBox = React.createClass({
+
+var AddThread = React.createClass({
+  render: function (){
+    return (
+      <AddPost postType="newThread" onPostSubmit={this.props.onPostSubmit}/>
+    );
+  }
+});
+
+var AddComment = React.createClass({
+  render: function (){
+    return (
+      <AddPost postType="comment" onPostSubmit={this.props.onPostSubmit}/>
+    );
+  }
+});
+
+
+var AllPosts = React.createClass({
   getInitialState: function() {
     return {data: []};
   },
@@ -134,11 +164,11 @@ var PostBox = React.createClass({
   render : function() {
     return (
       <div className="posts flex-child">
-        <AddPost onPostSubmit={this.handlePostSubmit}/>
-        <PostList data={this.state.data}/>
+          <AddThread onPostSubmit={this.handlePostSubmit}/>
+          <ThreadList data={this.state.data}/>
       </div>
     );
   }
 });
 
-module.exports = PostBox;
+module.exports = AllPosts;
