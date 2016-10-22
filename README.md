@@ -1,5 +1,5 @@
 # klartext
-simplifying group communication
+simplify group communication
 
 
 
