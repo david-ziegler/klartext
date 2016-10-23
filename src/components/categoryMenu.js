@@ -21,7 +21,7 @@ var CategoryLink = React.createClass({
   }
 });
 
-//{this.props.children + (catSelected ? '*' : '')} 
+//{this.props.children + (catSelected ? '*' : '')}
 
 
 var CategoryMenu = React.createClass({
@@ -41,9 +41,9 @@ var CategoryMenu = React.createClass({
 
     var categoryLinks = this.props.categories.map(function(category){
       return (
-          <CategoryLink 
-            catID={category.id} 
-            selectedID={selectedCat} 
+          <CategoryLink
+            catID={category.id}
+            selectedID={selectedCat}
             onCategorySelection={this.handleCategorySelection}
             categoryName={category.name} />
       );

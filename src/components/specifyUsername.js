@@ -20,10 +20,10 @@ var SpecifyUsername = React.createClass({
   render: function () {
     return (
       <div className="specifyUsername flex-child">
-        <form className="specifyUsername" onSubmit={this.handleSubmit}>
-          <input 
-            type="text" 
-            placeholder="Your name" 
+        <form className="specifyUsernameForm" onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            placeholder="Your name"
             onChange={this.handleUsernameChange} />
           <input
             type="submit"

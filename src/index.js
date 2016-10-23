@@ -5,7 +5,7 @@ var Posts = require('./components/posts.js');
 var CategoryMenu = require('./components/categoryMenu.js');
 var SpecifyUsername = require('./components/specifyUsername.js');
 
-var style = require('./css/base.css');
+var style = require('./css/base2.css');
 
 // DATA
 var groupData = {
@@ -13,8 +13,9 @@ var groupData = {
   groupName: "Group Name",
   categories: [
     {id: 0, name: "Allgemein"},
-    {id: 1, name: "Kategorie 2"},
-    {id: 2, name: "Kategorie 3"}
+    {id: 1, name: "Topfschlagen"},
+    {id: 2, name: "Sackhüpfen"},
+    {id: 2, name: "Eierlaufen"}
   ],
   posts: [
     {id: 0, user: 1, text: "Bla Bla Bla"},
@@ -30,7 +31,7 @@ var groupData = {
 var Group = React.createClass({
   getInitialState: function() {
     return {
-      username: '', 
+      username: '',
       selectedCategory: 0};
   },
 
@@ -49,7 +50,7 @@ var Group = React.createClass({
     console.log('parent knows cat: ' + catID);
   },
 
-  render: function () { 
+  render: function () {
     return (
       <div id="klartextGroup" className="flex-parent dir-col center">
 
@@ -57,15 +58,15 @@ var Group = React.createClass({
             <h1 id="groupname" className="flex-child">{groupData.groupName}</h1>
             <SpecifyUsername onUsernameSubmit={this.handleUsernameChange}/>
         </div>
-        
+
         <div id="body" className="flex-parent dir-column flex-child">
-          <CategoryMenu 
-            categories={groupData.categories} 
+          <CategoryMenu
+            categories={groupData.categories}
             selectedCat={this.state.selectedCategory}
             onCategorySelection={this.handleCategorySelection}/>
-          <div id="postsEtc">
+
             <Posts getUsername={this.getUsername}/>
-          </div>
+
         </div>
       </div>
     );
