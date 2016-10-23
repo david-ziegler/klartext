@@ -15,7 +15,7 @@ var Post = React.createClass({
           {this.props.author}:
         </span>
         <span className="postContent">
-          {this.props.children.toString()}    
+          {this.props.children.toString()}
         </span>
       </div>
     );
@@ -31,8 +31,8 @@ var Thread = React.createClass({
   render: function () {
     return (
       <div className="thread">
-        <Post 
-          author={this.props.author} 
+        <Post
+          author={this.props.author}
           key={this.props.key}>
             {this.props.children}
         </ Post>
@@ -98,9 +98,9 @@ var AddPost = React.createClass({
 
     return (
       <div className={this.props.postType}>
-        <form className={this.props.postType} onSubmit={this.handleSubmit}>
+        <form className={this.props.postType + 'Form'} onSubmit={this.handleSubmit}>
           <textarea
-            className={this.props.postType}
+            className={this.props.postType + 'Text'}
             placeholder={placeholder}
             onChange={this.handleTextChange}></textarea>
           <input type="submit" value="post" />
@@ -110,6 +110,11 @@ var AddPost = React.createClass({
   }
 });
 
+window.addEventListener("keypress", function(e) {
+  if(e.keyCode == 13) {
+    alert("ENTER");
+  }
+});
 
 
 var AddThread = React.createClass({
@@ -145,7 +150,7 @@ var AllPosts = React.createClass({
     var posts = this.state.data;
     // optimistically set an ID to add the post immediately,
     // will be replaced by ID from server later. TODO: create ID in more sophisticated way than Date.now()
-    post.id = Date.now(); 
+    post.id = Date.now();
     post.author = this.props.getUsername();
     var newPosts = posts.concat([post]);
     this.setState({data: newPosts});
